@@ -1,7 +1,9 @@
 {
   "name": "cars-commerce",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Small web app for cars commerce",
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -34,5 +36,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "keywords": [
+    "cars",
+    "marketplace",
+    "sell",
+    "rent",
+    "buy"
+  ],
+  "author": "Ahmed Razic",
+  "license": "ISC"
 }
