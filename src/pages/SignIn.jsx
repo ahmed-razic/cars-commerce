@@ -1,47 +1,45 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-//import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import OAuth from '../components/OAuth'
+import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
+import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
 function SignIn() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  });
+  })
 
-  const { email, password } = formData;
-  const navigate = useNavigate();
+  const { email, password } = formData
+  const navigate = useNavigate()
 
   function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
-    }));
+    }))
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  /*   const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault()
 
     try {
-      const auth = getAuth();
+      const auth = getAuth()
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
-      );
+      )
       if (userCredential.user) {
-        navigate('/');
+        navigate('/profile')
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Bad user credential')
     }
-  }; */
+  }
 
   return (
     <>
@@ -74,7 +72,7 @@ function SignIn() {
               alt='show password'
               className='showPassword'
               onClick={() => {
-                setShowPassword((prevState) => !prevState);
+                setShowPassword((prevState) => !prevState)
               }}
             />
             <Link to='/forgot-password' className='forgotPasswordLink'>
@@ -88,12 +86,13 @@ function SignIn() {
             </button>
           </div>
         </form>
+        <OAuth />
         <Link to='/sign-up' className='registerLink'>
           Sign Up Instead
         </Link>
       </div>
     </>
-  );
+  )
 }
 
-export default SignIn;
+export default SignIn

@@ -78,7 +78,6 @@ button {
   top: -3%;
   right: -2%;
 }
-
 .editIcon {
   cursor: pointer;
   position: absolute;
@@ -207,7 +206,7 @@ button {
 .showPassword {
   cursor: pointer;
   position: absolute;
-  top: -2%;
+  top: -4%;
   right: 1%;
   padding: 1rem;
 }
