@@ -1,46 +1,48 @@
-import { useState } from 'react';
-import { getAuth, updateProfile } from 'firebase/auth';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase.config';
-import { useNavigate, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { getAuth, updateProfile } from 'firebase/auth'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '../firebase.config'
+import { toast } from 'react-toastify'
+import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import homeIcon from '../assets/svg/homeIcon.svg'
 
 function Profile() {
-  const [changeDetails, setChangeDetails] = useState(false);
-  const auth = getAuth();
+  const [changeDetails, setChangeDetails] = useState(false)
+  const auth = getAuth()
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
-  });
+  })
 
-  const { name, email } = formData;
+  const { name, email } = formData
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const onLogout = () => {
-    auth.signOut();
-    navigate('/');
-  };
+    auth.signOut()
+    navigate('/')
+  }
 
   const onSubmit = async () => {
     try {
       if (auth.currentUser.displayName !== name) {
-        await updateProfile(auth.currentUser, { displayName: name });
+        await updateProfile(auth.currentUser, { displayName: name })
       }
 
-      const userRef = doc(db, 'users', auth.currentUser.uid);
-      await updateDoc(userRef, { name: name });
+      const userRef = doc(db, 'users', auth.currentUser.uid)
+      await updateDoc(userRef, { name: name })
     } catch (error) {
-      toast.error('Profile details could not be updated');
+      toast.error('Profile details could not be updated')
     }
-  };
+  }
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   return (
     <div className='profile'>
@@ -57,36 +59,43 @@ function Profile() {
           <p
             className='changePersonalDetails'
             onClick={() => {
-              changeDetails && onSubmit();
-              setChangeDetails((prevState) => !prevState);
+              changeDetails && onSubmit()
+              setChangeDetails((prevState) => !prevState)
             }}
           >
             {changeDetails ? 'Done' : 'Change'}
           </p>
         </div>
-        <form>
-          <input
-            type='text'
-            name='name'
-            id='name'
-            className={!changeDetails ? 'profileName' : 'profileNameActive'}
-            disabled={!changeDetails}
-            value={name}
-            onChange={onChange}
-          />
-          <input
-            type='email'
-            name='email'
-            id='email'
-            className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
-            disabled={!changeDetails}
-            value={email}
-            onChange={onChange}
-          />
-        </form>
+        <div className='profileCard'>
+          <form>
+            <input
+              type='text'
+              name='name'
+              id='name'
+              className={!changeDetails ? 'profileName' : 'profileNameActive'}
+              disabled={!changeDetails}
+              value={name}
+              onChange={onChange}
+            />
+            <input
+              type='email'
+              name='email'
+              id='email'
+              className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
+              disabled={!changeDetails}
+              value={email}
+              onChange={onChange}
+            />
+          </form>
+        </div>
+        <Link to='/create-listing' className='createListing'>
+          <img src={homeIcon} alt='home' />
+          <p>Sell or rent your car</p>
+          <img src={arrowRight} alt='arrow right' />
+        </Link>
       </main>
     </div>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

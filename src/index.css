@@ -372,7 +372,7 @@ button {
 
 .exploreCategories {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .exploreCategories a {
   width: 48%;
@@ -380,7 +380,7 @@ button {
 
 .exploreCategoryImg {
   min-height: 115px;
-  height: 15vw;
+  height: 25vw;
   width: 100%;
   border-radius: 1.5rem;
   object-fit: cover;
@@ -436,7 +436,7 @@ button {
 
 .categoryListingLocation {
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   opacity: 0.8;
   margin-bottom: 0;
 }
@@ -460,12 +460,13 @@ button {
 .categoryListingInfoDiv {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   max-width: 275px;
 }
 
 .categoryListingInfoText {
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 1.2rem;
 }
 
 .loadMore {
@@ -746,6 +747,11 @@ button {
   display: flex;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .formInput,
 .formInputAddress,
 .formInputName,
@@ -759,7 +765,7 @@ button {
 .formInputFile {
   margin-right: 3rem;
   padding: 0.9rem 0.7rem;
-  text-align: center;
+  text-align: start;
 }
 
 .formInputName {
