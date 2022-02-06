@@ -56,8 +56,10 @@ function HomeSlider() {
             >
               <div
                 style={{
-                  background: `url(${data.imgUrls[0]}) center no-repeat`,
+                  background: `url(${data.imgUrls[0]})`,
                   backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
                 }}
                 className='swiperSlideDiv'
               >
