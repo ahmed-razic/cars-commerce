@@ -232,7 +232,7 @@ function CreateListing() {
 
       <main>
         <form onSubmit={onSubmit}>
-          <label className='formLabel'>Sale / Rent</label>
+          <label className='formLabel'>Sell / Rent</label>
           <div className='formButtons'>
             <button
               type='button'
@@ -241,7 +241,7 @@ function CreateListing() {
               value='sale'
               onClick={onMutate}
             >
-              Sale
+              Sell
             </button>
             <button
               type='button'
