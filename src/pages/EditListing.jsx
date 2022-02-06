@@ -69,8 +69,8 @@ function EditListing() {
 
   //if listing i not of the current user, redirects to home
   useEffect(() => {
-    if (listing && listing.userRef !== auth.currentUser.uid) {
-      toast.error('You cannot eddit this listing')
+    if (listing.userRef !== auth.currentUser.uid) {
+      toast.error('You cannot edit this listing')
       navigate('/')
     }
   })
