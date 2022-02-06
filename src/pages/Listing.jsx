@@ -147,7 +147,7 @@ function Listing() {
             to={`/contact/${listing.userRef}?listingName=${listing.name}`}
             className='primaryButton'
           >
-            Contact Landlord
+            Contact Owner
           </Link>
         )}
       </div>
