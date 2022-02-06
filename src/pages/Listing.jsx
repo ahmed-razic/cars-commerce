@@ -90,7 +90,7 @@ function Listing() {
 
         <ul className='listingDetailsList'>
           <li>
-            Car Maker: <span className='tab'>`{listing.carMake}</span>{' '}
+            Car Maker: <span className='tab'>{listing.carMake}</span>{' '}
           </li>
           <li>
             Car Model: <span className='tab'>{listing.carModel}</span>
@@ -102,7 +102,10 @@ function Listing() {
             Fuel: <span className='tab'>{listing.fuel}</span>
           </li>
           <li>
-            Milage (km): <span className='tab'>{listing.milage}</span>
+            Milage (km):{' '}
+            <span className='tab'>
+              {listing.milage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </span>
           </li>
           <li>
             Doors: <span className='tab'>{listing.numberOfDoors}</span>
