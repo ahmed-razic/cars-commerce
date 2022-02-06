@@ -17,7 +17,7 @@ function EditListing() {
   //eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [listing, setListing] = useState([])
+  const [listing, setListing] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     type: 'sale',
@@ -68,12 +68,12 @@ function EditListing() {
   const isMounted = useRef(true)
 
   //if listing is not of the current user, redirects to home
-  /*  useEffect(() => {
+  useEffect(() => {
     if (listing && listing.userRef !== auth.currentUser.uid) {
       toast.error('You cannot edit this listing')
       navigate('/')
     }
-  }) */
+  })
 
   //fetch listing to edit
   useEffect(() => {
