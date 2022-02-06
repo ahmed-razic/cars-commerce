@@ -67,13 +67,13 @@ function EditListing() {
   const params = useParams()
   const isMounted = useRef(true)
 
-  //if listing i not of the current user, redirects to home
-  useEffect(() => {
-    if (listing.userRef !== auth.currentUser.uid) {
+  //if listing is not of the current user, redirects to home
+  /*  useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
       toast.error('You cannot edit this listing')
       navigate('/')
     }
-  })
+  }) */
 
   //fetch listing to edit
   useEffect(() => {
