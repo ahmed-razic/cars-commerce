@@ -228,7 +228,7 @@ function CreateListing() {
   return (
     <div className='profile'>
       <header>
-        <p className='pageHeader'>Create a Listing</p>
+        <p className='pageHeader'>Create Listing</p>
       </header>
 
       <main>

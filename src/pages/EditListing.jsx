@@ -7,8 +7,8 @@ import {
   getDownloadURL,
 } from 'firebase/storage'
 import { db } from '../firebase.config'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
+import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore'
+import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
@@ -17,6 +17,7 @@ function EditListing() {
   //eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [listing, setListing] = useState([])
   const [formData, setFormData] = useState({
     name: '',
     type: 'sale',
@@ -63,8 +64,36 @@ function EditListing() {
 
   const auth = getAuth()
   const navigate = useNavigate()
+  const params = useParams()
   const isMounted = useRef(true)
 
+  //if listing i not of the current user, redirects to home
+  useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
+      toast.error('You cannot eddit this listing')
+      navigate('/')
+    }
+  })
+
+  //fetch listing to edit
+  useEffect(() => {
+    setLoading(true)
+    const fetchListing = async () => {
+      const docRef = doc(db, 'listings', params.listingId)
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        setListing(docSnap.data())
+        setFormData({ ...docSnap.data() })
+        setLoading(false)
+      } else {
+        navigate('/')
+        toast.error('Listing does not exist')
+      }
+    }
+    fetchListing()
+  }, [params.listingId, navigate])
+
+  //sets userRef to logged in user
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -188,7 +217,9 @@ function EditListing() {
     delete formDataCopy.location
     !formDataCopy.offer && delete formDataCopy.discountedPrice
 
-    const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
+    //update liting with new data from edit
+    const docRef = doc(db, 'listings', params.listingId)
+    await updateDoc(docRef, formDataCopy)
     setLoading(false)
     toast.success('Listin saved in database')
     navigate(`/category/${formDataCopy.type}/${docRef.id}`)
@@ -228,7 +259,7 @@ function EditListing() {
   return (
     <div className='profile'>
       <header>
-        <p className='pageHeader'>Create a Listing</p>
+        <p className='pageHeader'>Edit Listing</p>
       </header>
 
       <main>
@@ -544,8 +575,8 @@ function EditListing() {
             multiple
             required
           />
-          <button type='submit' className='primaryButton createListingButton'>
-            Create Listing
+          <button type='submit' className='primaryButton editListingButton'>
+            Edit Listing
           </button>
         </form>
       </main>

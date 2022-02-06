@@ -39,6 +39,10 @@ function HomeSlider() {
     return <Spinner />
   }
 
+  if (listings.lenght === 0) {
+    return <></>
+  }
+
   return (
     listings && (
       <>
