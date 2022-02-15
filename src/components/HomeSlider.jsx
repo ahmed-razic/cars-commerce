@@ -46,7 +46,7 @@ function HomeSlider() {
   return (
     listings && (
       <>
-        <p className='explereHeading'>Recomended</p>
+        <p className='exploreHeading'>Recomended</p>
 
         <Swiper slidesPerView={1} pagination={{ clickable: true }}>
           {listings.map(({ data, id }) => (
