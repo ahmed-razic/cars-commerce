@@ -9,7 +9,7 @@
     background: #F1DEDE;
     border-radius:10px;
     font-size:0.85rem;
-    font-weight:600;">Deployed on Vercel</a> <br/> 
+    font-weight:600;">Cars Commerce</a> <br/> 
 <!-- <a href="#" target="_blank" rel="noopener noreferrer"
     style="padding:0.5rem 0.7rem;
     color: black;
